@@ -55,6 +55,7 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Actual Postion", m_robotContainer.m_test.actualPosition);
     SmartDashboard.putNumber("Set Point", m_robotContainer.m_test.setpointGlobal);
     SmartDashboard.putNumber("Encoder value", m_robotContainer.m_test.encoder.getPosition());
+    SmartDashboard.putNumber("Motor Current", m_robotContainer.m_test.motor.getOutputCurrent());
 
   }
 

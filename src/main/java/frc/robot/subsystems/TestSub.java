@@ -39,7 +39,7 @@ public class TestSub extends SubsystemBase {
   public double maxAcceleration = 0;
   public double maxVelocity = 0;
   public double actualPosition = 0;
-  public double setpointGlobal = 0;
+  public double setpointGlobal = -45;
   public double allowedClosedLoopError = 0;
   public boolean doUpdatePID = true;
 
@@ -58,11 +58,9 @@ public class TestSub extends SubsystemBase {
 
 
 
+
   public TestSub() 
   {
-
-
-
   // assign entrys
     ShuffleboardTab pidPosition = Shuffleboard.getTab("Pid Position");
     pEntry = pidPosition.add("kP",0).getEntry();
@@ -77,11 +75,12 @@ public class TestSub extends SubsystemBase {
     
   // Create motors
     motor = new SparkMax(5, SparkMax.MotorType.kBrushless);
-  
-  // Get PID controller from motor
+    motorConfig.inverted(false);
     pidController = motor.getClosedLoopController();
     
-   motorConfig.encoder.positionConversionFactor(5.142);
+   motorConfig.encoder.positionConversionFactor(5.143);
+   //motorConfig.encoder.velocityConversionFactor(0.066);
+
     // Instantiate encoder
     encoder = motor.getEncoder();
     
@@ -97,7 +96,7 @@ public class TestSub extends SubsystemBase {
     //motorConfig.closedLoop.maxMotion.maxAcceleration(maxVelocity);
     //motorConfig.closedLoop.maxMotion.maxVelocity(maxVelocity);
   
-    motorConfig.smartCurrentLimit(80, 40);
+    motorConfig.smartCurrentLimit(60, 60);
     //motor.configure(motorConfig, com.revrobotics.spark.SparkBase.ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
     
 
@@ -212,7 +211,7 @@ public class TestSub extends SubsystemBase {
     }
     public void setZero()
     {
-      encoder.setPosition(0);
+      encoder.setPosition(103.9);
     }
         
   }
